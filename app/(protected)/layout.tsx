@@ -17,7 +17,7 @@ const MainLayout = ({
             <Toaster />
                     <Sidebar className="hidden lg:flex"/>
                         <ModalProvider />
-                             <main className="lg:pl-[256px] h-full md:pt-[0px] sm:pt-[20px] lg:pt-[0px]">
+                             <main className="lg:pl-[256px] h-full md:pt-[0px] sm:pt-[20px] lg:pt-[0px] sm:pl-[30px]">
                                 <div className="w-full h-full mx-auto"> 
                                      {children}
                                 </div>
