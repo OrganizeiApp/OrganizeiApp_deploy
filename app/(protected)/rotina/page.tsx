@@ -9,7 +9,7 @@ const rotina = async () => {
 
 
     return (
-        <div className="w-full flex flex-row-reverse gap-[48px]">
+        <div className="w-full flex flex-row-reverse">
             <FeedWrapper>
             <div className="lg:hidden">
             <MobileSidebar />
