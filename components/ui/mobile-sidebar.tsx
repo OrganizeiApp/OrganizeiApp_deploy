@@ -11,7 +11,7 @@ import Link from "next/link";
 export const MobileSidebar = () => {
     return (
         <div className="w-full h-[50px] bg-[#7935E8] flex items-center justify-center relative">
-            <Link href="/inicio">
+            <Link href="/rotina">
             <Button
                 className="flex items-center space-x-2"
                 variant='logo'
