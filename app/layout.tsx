@@ -1,3 +1,4 @@
+/* trunk-ignore-all(prettier) */
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -6,7 +7,7 @@ import { Nunito } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
-const font = Nunito({ subsets: ["latin"] });
+const font = Nunito({subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Organizei",
@@ -24,8 +25,7 @@ export const metadata: Metadata = {
         href: "/desenho.svg",
       }
     ]
-  },
-  viewport: "width=device-width, initial-scale=1.0" // Adiciona a tag viewport aqui
+  }
 };
 
 export default async function RootLayout({
@@ -37,11 +37,11 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
-      <html lang="pt-br" suppressHydrationWarning>
-        <body className={font.className}>
-          {children}
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={font.className}>
+        {children}
         </body>
-      </html>
+    </html>
     </SessionProvider>
   );
 }
