@@ -7,7 +7,7 @@ import { Infos } from "./_components/info";
 
 const calendario = async () => {
     return (
-        <div className="w-full flex flex-row-reverse">
+        <div className="w-full flex flex-row-reverse gap-[48px]">
             <FeedWrapperInicio>
             <div className="lg:hidden">
             <MobileSidebar />
