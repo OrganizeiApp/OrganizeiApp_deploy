@@ -18,6 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         ghostlist: "bg-transparent hover:bg-transparent hover:text-[#3A95EA]",
+        ghostmarketing:"bg-transparent hover:bg-transparent text-white/60 hover:text-white",
         link: "text-primary underline-offset-4 hover:underline",
         dashboard: "bg-[#F8F7FF] border-slate-200 border-2 border-b-4 active:border-b-2 hover:bg-slate-100 text-slate-500 text-[#7935E8] font-extrabold text-lg",
         dashtog: "bg-[#7935E8] border-slate-200 border-2 border-b-4 active:border-b-2 hover:bg-slate-100 text-slate-500 text-[#7935E8] font-extrabold text-lg",

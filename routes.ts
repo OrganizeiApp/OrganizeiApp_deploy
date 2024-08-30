@@ -1,5 +1,6 @@
 export const publicRoutes = [
-    "/"
+    "/",
+    "/terms-of-service",
 ];
 
 export const authRoutes = [
