@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Header } from "./header";
 import { Description } from "./description";
 import { Actions } from "./actions";
+import { Calendario } from "./calendar";
 
 export const CardModal = () => {
     const id = useCardModal((state) => state.id);
@@ -35,6 +36,9 @@ export const CardModal = () => {
                             ? <Description.Skeleton />
                             : <Description data={cardData} />
                         }
+                        <div className="pl-4">
+                        <Calendario />
+                        </div>
                     </div>
                     {!cardData
                         ? <Actions.Skeleton />

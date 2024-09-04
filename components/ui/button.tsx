@@ -36,6 +36,8 @@ const buttonVariants = cva(
         fonted: "bg-white text-[#8DC3F5] border-[#8DC3F5] border-2",
         paragraphed: "bg-white text-[#F5CF8D] border-[#F5CF8D] border-2",
         logo: "text-white normal-case font-extrabold text-xl",
+        tiktok: "bg-white normal-case font-extrabold text-xl text-[#1a0b1a] border-2 border-[#1a0b1a]",
+        instagram: "bg-white normal-case font-extrabold text-xl text-[#cb406d] border-2 border-[#cb406d]",
         // lembrar adicionar a variante nova no components -> form -> form-submit.tsx
       },
       size: {
@@ -43,6 +45,7 @@ const buttonVariants = cva(
         sm: "h-9 px-3",
         lg: "h-12 px-8",
         big: "h-20 w-80 text-lg text-white",
+        bigd: "h-20 w-80 text-lg",
         tt: "h-12 w-40",
         sr: "h-10 px-8",
         icon: "h-10 w-10",

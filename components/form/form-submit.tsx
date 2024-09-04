@@ -9,7 +9,7 @@ interface FormSubmitProps {
     children: React.ReactNode;
     disabled?: boolean;
     className?: string;
-    variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "dashboard" | "dashtog" | "entrar" | "lembretes" | "purple" | "red" | "blue" | "yellow" | "green" | "ghostlist" | "lightpurple" | "texted" | "headinged" | "imageed" | "fonted" | "paragraphed" | "logo" | "ghostmarketing" ;
+    variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "dashboard" | "dashtog" | "entrar" | "lembretes" | "purple" | "red" | "blue" | "yellow" | "green" | "ghostlist" | "lightpurple" | "texted" | "headinged" | "imageed" | "fonted" | "paragraphed" | "logo" | "ghostmarketing" | "tiktok" | "instagram" ;
 }
 
 export const FormSubmit = ({

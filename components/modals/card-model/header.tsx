@@ -74,7 +74,7 @@ export const Header = ({
                     />
                 </form>
                 <p className="text-sm font-bold text-[#8DC3F5]">
-                    in list <span className="underline">{data.list.title}</span>
+                    em lista <span className="underline">{data.list.title}</span>
                 </p>
             </div>
         </div>

@@ -1,6 +1,7 @@
 export const publicRoutes = [
     "/",
     "/terms-of-service",
+    "/privacy-policy",
 ];
 
 export const authRoutes = [
@@ -15,5 +16,5 @@ export const apiAuthPrefix = "/api/auth";
  * O lugar padrão que o usuario é enviado depois de loggar
  */
 
-// export const DEFAULT_LOGIN_REDIRECT = "/inicio";
-export const DEFAULT_LOGIN_REDIRECT = "/rotina";
+export const DEFAULT_LOGIN_REDIRECT = "/inicio";
+// export const DEFAULT_LOGIN_REDIRECT = "/rotina";

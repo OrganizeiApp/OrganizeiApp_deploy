@@ -27,15 +27,20 @@ export const Sidebar = ({ className }: Props) => {
                 </h1>
             </div>
             <div className="flex flex-col gap-y-2 flex-1">
-            {/* <SidebarItem 
+            <SidebarItem 
             label="Início" 
             href="/inicio"
-            iconSrc="/EXTANTE.svg"
-            /> */}
+            iconSrc="/CASA.svg"
+            />
             <SidebarItem 
             label="Rotina" 
             href="/rotina"
             iconSrc="/CALENDARIO.svg"
+            />
+            <SidebarItem
+            label="ESTANTE"
+            href="/estante"
+            iconSrc="/EXTANTE.svg"
             />
             <SidebarItem
             label="FEEDBACK" 
