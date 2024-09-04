@@ -14,8 +14,6 @@ import { useState } from 'react';
 import { EndTimePicker } from './duracao';
 import { useCardModal } from '@/hooks/use-card-modal';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCardById } from '@/app/api/fetch-card-by-id/route';
-
 
 const formSchema = z.object({
     dateTime: z.date(),
@@ -28,8 +26,14 @@ export default function DateTimePickerForm() {
 
     const { data: cardData, isLoading, error } = useQuery(
         ['card', id],
-        () => fetchCardById(id),
-        { enabled: !!id } // Only fetch if id is available
+        async () => {
+            const response = await fetch(`/api/cards/${id}`);
+            if (!response.ok) {
+                throw new Error("Erro ao buscar o card");
+            }
+            return response.json();
+        },
+        { enabled: !!id } // Somente busca se o ID estiver disponível
     );
 
     const form = useForm<FormSchemaType>({
@@ -37,6 +41,11 @@ export default function DateTimePickerForm() {
     });
 
     async function onSubmit(values: FormSchemaType) {
+        if (!cardData) {
+            toast("Dados do card não encontrados");
+            return;
+        }
+
         console.log("Título do evento:", cardData.title);
         console.log("Descrição do evento:", cardData.description);
         console.log("Data de início:", values.dateTime);
@@ -50,89 +59,95 @@ export default function DateTimePickerForm() {
             'summary': cardData.title,
             'description': cardData.description,
             'start': {
-                'dateTime': values.dateTime,
+                'dateTime': values.dateTime.toISOString(),
                 'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
             },
             'end': {
-                'dateTime': endTime,
+                'dateTime': endTime?.toISOString(),
                 'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
             }
-        }
+        };
         await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
             method: "POST",
             headers: {
-                'Authorization': 'Bearer ' + accessToken, // access token for Google
+                'Authorization': 'Bearer ' + accessToken, // access token para Google
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(event)
-        }).then((data) => {
-            return data.json();
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error("Erro ao criar evento no Google Calendar");
+            }
+            return response.json();
         }).then((data) => {
             console.log(data);
-        })
-
-        toast("Evento criado!");
+            toast("Evento criado com sucesso!");
+        }).catch((error) => {
+            console.error(error);
+            toast("Erro ao criar evento!");
+        });
     }
 
     return (
         <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-            control={form.control}
-            name="dateTime"
-            render={({ field }) => (
-                <FormItem className='relative flex items-center'>
-                    <div className='flex items-center'>
-                        <Popover>
-                            <PopoverTrigger asChild>
-                                <Button
-                                    variant={"outline"}
-                                    className={cn(
-                                        "w-[310px] justify-start text-left font-normal border-2 border-[#8DC3F5]",
-                                        !field.value && "text-muted-foreground"
-                                    )}
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <FormField
+                    control={form.control}
+                    name="dateTime"
+                    render={({ field }) => (
+                        <FormItem className='relative flex items-center'>
+                            <div className='flex items-center'>
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <Button
+                                            variant={"outline"}
+                                            className={cn(
+                                                "w-[310px] justify-start text-left font-normal border-2 border-[#8DC3F5]",
+                                                !field.value && "text-muted-foreground"
+                                            )}
+                                        >
+                                            <CalendarIcon className="mr-2 h-4 w-4 text-[#463F3A]" />
+                                            {field.value ? format(field.value, "dd/MM/yyyy - HH:mm") : <span className='text-[#463F3A] font-extrabold'>Selecionar data</span>}
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0">
+                                        <Calendar
+                                            mode="single"
+                                            selected={field.value}
+                                            onSelect={field.onChange}
+                                            disabled={(date) => date <= new Date()}
+                                            initialFocus
+                                        />
+                                        <div className='p-3 border-t border-border'>
+                                            <p className='font-extrabold text-[#8DC3F5]'>Início do Evento:</p>
+                                            <TimePicker setDate={field.onChange} date={field.value}/>
+                                        </div>
+                                        <div className='p-3 border-t border-border'>
+                                            <p className='font-extrabold text-[#8DC3F5]'>Fim do Evento:</p>  
+                                            <EndTimePicker 
+                                                setDate={field.onChange} 
+                                                date={field.value} 
+                                                setEndTime={setEndTime}
+                                            />
+                                        </div>
+                                    </PopoverContent>
+                                </Popover>
+                                {/* Submissão é tratada pelo form, então não precisamos do onClick aqui */}
+                                <Button 
+                                    type="submit"
+                                    variant="lightpurple"
+                                    size="calendar"
+                                    className="ml-3.5"
                                 >
-                                    <CalendarIcon className="mr-2 h-4 w-4 text-[#463F3A]" />
-                                    {field.value ? format(field.value, "dd/MM/yyyy - HH:mm") : <span className='text-[#463F3A] font-extrabold'>Selecionar data</span>}
+                                    <LucideCalendar className="h-4 w-4 mr-2" />
+                                    Salvar
                                 </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0">
-                                <Calendar
-                                    mode="single"
-                                    selected={field.value}
-                                    onSelect={field.onChange}
-                                    disabled={(date) => date <= new Date()}
-                                    initialFocus
-                                />
-                                <div className='p-3 border-t border-border'>
-                                    <p className='font-extrabold text-[#8DC3F5]'>Início do Evento:</p>
-                                    <TimePicker setDate={field.onChange} date={field.value}/>
-                                </div>
-                                <div className='p-3 border-t border-border'>
-                                    <p className='font-extrabold text-[#8DC3F5]'>Fim do Evento:</p>  
-                                    <EndTimePicker 
-                                        setDate={field.onChange} 
-                                        date={field.value} 
-                                        setEndTime={setEndTime}
-                                    />
-                                </div>
-                            </PopoverContent>
-                        </Popover>
-                        <Button 
-                            variant="lightpurple"
-                            onClick={onSubmit}
-                            size="calendar"
-                            className="ml-3.5"
-                        >
-                            <LucideCalendar className="h-4 w-4 mr-2" />
-                            Salvar
-                        </Button>
-                    </div>
-                    <FormMessage />
-                </FormItem>
-            )}
-        />
-    </form>
-</Form>
-
+                            </div>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            </form>
+        </Form>
     );
 }
