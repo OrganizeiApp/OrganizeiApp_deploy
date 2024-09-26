@@ -1,6 +1,3 @@
-
-
-
 const TermsOfServiceLayout = ({
     children
 }: {

@@ -37,11 +37,16 @@ export const Sidebar = ({ className }: Props) => {
             href="/rotina"
             iconSrc="/CALENDARIO.svg"
             />
-            {/* <SidebarItem
+            <SidebarItem
             label="ESTANTE"
             href="/estante"
             iconSrc="/EXTANTE.svg"
-            /> */}
+            />
+            <SidebarItem
+            label="TEMPLATES"
+            href="/templates"
+            iconSrc="/RESUMO.svg"
+            />
             <SidebarItem
             label="FEEDBACK" 
             href="https://forms.gle/vhn5N7v77xXMqnVaA"
