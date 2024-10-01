@@ -39,7 +39,7 @@ export const ResumoList = async () => {
                 {resumos.map((resumo) => (
                     <Link
                     key={resumo.id}
-                    href={`/rotina/${resumo.id}`}
+                    href={`/resumo/${resumo.id}`}
                     className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-[#FFF6E5] border-2 border-[#F5CF8D] rounded-sm h-full w-full p-2 overflow-hidden"
                     >
                         <div />
