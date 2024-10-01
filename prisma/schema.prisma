@@ -22,6 +22,8 @@ model User {
   role          UserRole @default(USER)
   accounts      Account []
   boards        Board[]
+  cadernos      Caderno[]
+  resumos       Resumo[]
 }
 
 model Account {
@@ -85,7 +87,59 @@ model Card {
   @@index([listId])
 }
 
-model ResumoLimit {
+model Caderno {
+    id                 String   @id @default(cuid())
+    title              String
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
+    userId             String
+    user               User     @relation(fields: [userId], references: [id])
+    lists              IList[]
+ }
+
+model IList {
+  id                   String   @id @default(cuid())
+  title                String
+  order                Int
+
+  cadernoId            String
+  caderno              Caderno    @relation(fields: [cadernoId], references: [id], onDelete: Cascade)
+
+  cards                ICard[]
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([cadernoId]) //talvez ajuste o resumo
+}
+
+model ICard {
+  id                   String   @id @default(cuid())
+  title                String
+  order                Int
+  description          String? @db.Text
+
+  listId               String
+  list                 IList @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([listId])
+}
+
+model Resumo {
+    id                 String   @id @default(cuid())
+    title              String
+    content            String?  @db.Text
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
+    userId             String
+    user               User     @relation(fields: [userId], references: [id])
+ }
+
+
+model EstanteLimit {
   id                   String @id @default(cuid())
   userId               String @unique
   count                Int @default(0)

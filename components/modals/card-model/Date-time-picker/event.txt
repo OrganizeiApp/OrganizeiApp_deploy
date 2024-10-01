@@ -1,0 +1,23 @@
+/* const event = {
+            'summary': eventName,
+            'description': eventDescription,
+            'start': {
+                'dateTime': values.dateTime.toISOString(),
+                'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+            },
+            'end': {
+                'dateTime': endTime?.toISOString(),
+                'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
+            }
+        }
+        await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + session.provider_token // access token for Google
+            },
+            body: JSON.stringify(event)
+        }).then((data) => {
+            return data.json();
+        }).then((data) => {
+            console.log(data);
+        }); */

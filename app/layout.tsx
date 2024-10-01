@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./prosemirror.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Nunito } from "next/font/google";
 import { SessionProvider } from "next-auth/react";

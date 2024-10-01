@@ -1,16 +1,16 @@
 import { db } from "@/lib/db";
-import { Board } from "@prisma/client";
-import { FormPopover } from "@/components/form/form-popover-board";
+import { Resumo } from "@prisma/client";
+import { FormPopover } from "@/components/form/form-popover-resumo";
 import { Hint } from "@/components/hint";
 import { HelpCircle, User2 } from "lucide-react";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { MAX_FREE_ROTINA } from "@/constants/rotina";
-import { getAvailableCount } from "@/lib/rotina-limit";
+import { MAX_FREE_ESTANTE } from "@/constants/estante";
+import { getAvailableCount } from "@/lib/estante-limit";
 import { Ellipsis } from 'lucide-react';
 
-export const BoardList = async () => {
+export const ResumoList = async () => {
 
     const session = await auth();
 
@@ -20,7 +20,7 @@ export const BoardList = async () => {
 
     const userId = session.user.id;
 
-    const boards = await db.board.findMany({
+    const resumos = await db.resumo.findMany({
         where: {
             userId: userId,
         },
@@ -36,15 +36,15 @@ export const BoardList = async () => {
             <div className="flex items-center font-semibold text-lg text-neutral-700">
             </div>
             <div className="grid grid-cols-2 sm:grid-cols3 lg:grid-cols-4 gap-4">
-                {boards.map((board) => (
+                {resumos.map((resumo) => (
                     <Link
-                    key={board.id}
-                    href={`/rotina/${board.id}`}
-                    className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-[#E5FFF0] border-2 border-[#B6FAD2] rounded-sm h-full w-full p-2 overflow-hidden"
+                    key={resumo.id}
+                    href={`/rotina/${resumo.id}`}
+                    className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-[#FFF6E5] border-2 border-[#F5CF8D] rounded-sm h-full w-full p-2 overflow-hidden"
                     >
                         <div />
-                        <p className="relative font-extrabold text-[#62F09C]">
-                            {board.title}
+                        <p className="relative font-extrabold text-[#F5CF8D]">
+                            {resumo.title}
                         </p>
                         <div className="justify-end pr-2"/>
                     </Link>
@@ -54,9 +54,9 @@ export const BoardList = async () => {
                 role="button"
                 className="aspect-video relative h-full w-full bg-muted rounded-lg flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
                 >
-                <p className="text-sm">Criar novo Quadro</p>
+                <p className="text-sm">Criar novo Resumo</p>
                 <span className="text-xs">
-                    {`${MAX_FREE_ROTINA - AvailableCount} restantes`} 
+                    {`${MAX_FREE_ESTANTE - AvailableCount} restantes`} 
                 </span>
                 <Hint
                     sideOffset={40}

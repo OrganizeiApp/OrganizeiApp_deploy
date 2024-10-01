@@ -16,6 +16,7 @@
     "@blocknote/react": "^0.15.10",
     "@chakra-ui/react": "^2.8.2",
     "@hello-pangea/dnd": "^16.6.0",
+    "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "@lexical/utils": "^0.17.0",
     "@nanostores/react": "github:ai/react",
@@ -29,9 +30,9 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@tanstack/react-query": "^4.36.1",
-    "@tiptap/pm": "^2.5.9",
-    "@tiptap/react": "^2.5.9",
-    "@tiptap/starter-kit": "^2.5.9",
+    "@tiptap/pm": "^2.8.0",
+    "@tiptap/react": "^2.8.0",
+    "@tiptap/starter-kit": "^2.8.0",
     "@trpc/client": "^10.45.2",
     "@trpc/next": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
@@ -76,6 +77,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
