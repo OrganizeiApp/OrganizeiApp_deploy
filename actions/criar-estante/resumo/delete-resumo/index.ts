@@ -5,9 +5,9 @@ import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { InputType, ReturnType } from "./types";
-import { DeleteBoard } from "./schema";
+import { DeleteResumo } from "./schema";
 import { redirect } from "next/navigation";
-import { decreaseAvailableCount } from "@/lib/rotina-limit";
+import { decreaseAvailableCount } from "@/lib/estante-limit";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
     const session = await auth();
@@ -21,10 +21,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     const userId = session.user.id;
 
     const { id } = data;
-    let board;
+    let resumo;
 
     try {
-        board = await db.board.delete({
+        resumo = await db.resumo.delete({
             where: {
                 id,
                 userId,
@@ -39,8 +39,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         }
     }
 
-    revalidatePath('/rotina');
-    redirect(`/rotina`);
+    revalidatePath('/estante');
+    redirect(`/estante`);
 };
 
-export const deleteBoard = createSafeAction(DeleteBoard, handler);
+export const deleteResumo = createSafeAction(DeleteResumo, handler);

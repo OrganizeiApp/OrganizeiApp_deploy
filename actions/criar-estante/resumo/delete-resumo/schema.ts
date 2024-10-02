@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const DeleteBoard = z.object({
+export const DeleteResumo = z.object({
     id: z.string(),
 });

@@ -2,6 +2,11 @@ import React from 'react'
 import { Editor } from '@tiptap/react'
 import { PencilSquareIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { Resumo } from '@prisma/client';
+import { UseAction } from '@/hooks/use-action';
+import { deleteResumo } from '@/actions/criar-estante/resumo/delete-resumo';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@radix-ui/react-separator';
 
 type Props = {
     isEditable: boolean;
@@ -41,7 +46,18 @@ const Edit = ({
     editor?.commands.setContent(tempContent);
   };
 
+  const { execute, isLoading } = UseAction(deleteResumo, {
+    onError: (error) => {
+        toast.error(error);
+    }
+});
+
+    const onDelete = () => {
+        execute({ id: resumo.id });
+    };
+
   return (
+        <div>
             <div className="flex justify-between items-center">
                 <div className='mt-4'>
                     {isEditable ? (
@@ -56,7 +72,16 @@ const Edit = ({
                         </button>
                     )}
                 </div>
+                <div className='mt-4'>
+                    <Button
+                    variant="purple"
+                    onClick={onDelete}
+                    >
+                        Deletar
+                    </Button>
+                </div>
             </div>
+        </div>
         )
   }
 
